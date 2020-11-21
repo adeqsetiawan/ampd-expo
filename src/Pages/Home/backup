@@ -1,0 +1,450 @@
+import React, { useEffect, useState } from "react";
+import { Alert, AsyncStorage, Image, Text, View } from "react-native";
+import { SliderBox } from "react-native-image-slider-box";
+import { Button, IconButton, TouchableRipple } from "react-native-paper";
+import {
+  iconData,
+  iconinspeksi,
+  iconMonitoring,
+  iconPelanggan,
+  iconPemeliharaan,
+  iconWdAset,
+} from "../../../assets";
+
+const Home = ({ navigation }) => {
+  const [state, setState] = useState({
+    images: [
+      require("../../../assets/slider/1.png"), // Local image
+      require("../../../assets/slider/2.png"), // Local image
+    ],
+    nama_area: "data kosong",
+    nama_rayon: "data kosong",
+    nama_jtm: "data kosong",
+  });
+
+  const HandlingData = async () => {
+    try {
+      const Area = await AsyncStorage.getItem("Namaarea");
+      const Rayon = await AsyncStorage.getItem("Namarayon");
+      const Jtm = await AsyncStorage.getItem("Namajtm");
+      const hasilArea = await JSON.parse(Area);
+      const hasilRayon = await JSON.parse(Rayon);
+      const hasilJtm = await JSON.parse(Jtm);
+
+      if (!hasilJtm) {
+        navigation.navigate("Account");
+        Alert.alert(
+          "Perhatian",
+          "Data Tiang Wajib di Tentukan di Awal Aplikasi Berjalan"
+        );
+      } else
+        setState((prefState) => ({
+          ...prefState,
+          nama_area: hasilArea,
+          nama_rayon: hasilRayon,
+          nama_jtm: hasilJtm,
+        }));
+      console.log(hasilJtm);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    HandlingData();
+  }, [state.nama_jtm]);
+
+  return (
+    <>
+      <View style={{ borderRadius: 25 }}>
+        <SliderBox
+          images={state.images}
+          autoplay={true}
+          circleLoop={true}
+          dotColor="orange"
+          inactiveDotColor="tomato"
+        />
+      </View>
+      <View style={{ paddingTop: 10 }} />
+      <View style={{ alignSelf: "center" }}>
+        <View style={{ flexDirection: "row" }}>
+          <View
+            style={{
+              width: 130,
+              height: 130,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "#eeeeee",
+              borderWidth: 2,
+              marginRight: 5,
+              marginLeft: 5,
+            }}
+          >
+            <TouchableRipple
+              onPress={() => console.log("Pressed")}
+              rippleColor="rgba(0, 0, 0, 0.08)"
+            >
+              <View
+                style={{
+                  paddingTop: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={iconMonitoring}
+                  style={{ width: 60, height: 60 }}
+                />
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontSize: 12,
+                    color: "grey",
+                  }}
+                >
+                  Monitoring
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+
+          <View
+            style={{
+              width: 130,
+              height: 130,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "#eeeeee",
+              borderWidth: 2,
+              marginRight: 5,
+            }}
+          >
+            <TouchableRipple
+              onPress={() => navigation.navigate("Pemeliharaan")}
+              rippleColor="rgba(0, 0, 0, 0.08)"
+            >
+              <View
+                style={{
+                  paddingTop: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={iconPemeliharaan}
+                  style={{ width: 60, height: 60 }}
+                />
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontSize: 12,
+                    color: "grey",
+                  }}
+                >
+                  Pemeliharaan
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+          <View
+            style={{
+              width: 130,
+              height: 130,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "#eeeeee",
+              borderWidth: 2,
+              marginRight: 5,
+            }}
+          >
+            <TouchableRipple
+              onPress={() => navigation.navigate("Inspeksi")}
+              rippleColor="rgba(0, 0, 0, 0.08)"
+            >
+              <View
+                style={{
+                  paddingTop: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={iconinspeksi}
+                  style={{ width: 60, height: 60 }}
+                />
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontSize: 12,
+                    color: "grey",
+                  }}
+                >
+                  Inspeksi
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+        </View>
+        <View style={{ flex: 1, flexDirection: "row", paddingTop: 5 }}>
+          <View
+            style={{
+              width: 130,
+              height: 130,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "#eeeeee",
+              borderWidth: 2,
+              marginRight: 5,
+              marginLeft: 5,
+            }}
+          >
+            <TouchableRipple
+              onPress={() => navigation.navigate("Pemeliharaan")}
+              rippleColor="rgba(0, 0, 0, 0.08)"
+            >
+              <View
+                style={{
+                  paddingTop: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={iconPelanggan}
+                  style={{ width: 60, height: 60 }}
+                />
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontSize: 12,
+                    color: "grey",
+                  }}
+                >
+                  Pelanggan
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+          <View
+            style={{
+              width: 130,
+              height: 130,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "#eeeeee",
+              borderWidth: 2,
+              marginRight: 5,
+            }}
+          >
+            <TouchableRipple
+              onPress={() => navigation.navigate("Pemeliharaan")}
+              rippleColor="rgba(0, 0, 0, 0.08)"
+            >
+              <View
+                style={{
+                  paddingTop: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image source={iconWdAset} style={{ width: 60, height: 60 }} />
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontSize: 12,
+                    color: "grey",
+                  }}
+                >
+                  Wall Down Aset
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+          <View
+            style={{
+              width: 130,
+              height: 130,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "#eeeeee",
+              borderWidth: 2,
+              marginRight: 5,
+            }}
+          >
+            <TouchableRipple
+              onPress={() => navigation.navigate("Pemeliharaan")}
+              rippleColor="rgba(0, 0, 0, 0.08)"
+            >
+              <View
+                style={{
+                  paddingTop: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image source={iconData} style={{ width: 60, height: 60 }} />
+                <Text
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontSize: 12,
+                    color: "grey",
+                  }}
+                >
+                  Master Data
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+        </View>
+        <View style={{ paddingTop: 10 }} />
+
+        <View
+          style={{
+            margin: 10,
+            flex: 3,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              widht: 200,
+              height: 60,
+            }}
+          >
+            <View style={{ paddingTop: 10 }} />
+            <View
+              style={{
+                flexDirection: "row",
+                alignSelf: "center",
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "cadetblue",
+                  width: 120,
+                  borderRadius: 3,
+                }}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <IconButton
+                    icon="map-check-outline"
+                    color="white"
+                    size={20}
+                  />
+
+                  <View
+                    style={{
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        paddingTop: 10,
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: 7,
+                      }}
+                    >
+                      {state.nama_area}
+                    </Text>
+                    <Text style={{ fontSize: 10, color: "floralwhite" }}>
+                      UP3/AREA
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View style={{ paddingLeft: 10 }} />
+              <View
+                style={{
+                  backgroundColor: "crimson",
+                  width: 120,
+                  borderRadius: 3,
+                }}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <IconButton
+                    icon="minus-box-outline"
+                    color="white"
+                    size={20}
+                  />
+
+                  <View
+                    style={{
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        paddingTop: 10,
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: 8,
+                      }}
+                    >
+                      {state.nama_rayon}
+                    </Text>
+                    <Text style={{ fontSize: 10, color: "floralwhite" }}>
+                      ULP/RAYON
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View style={{ paddingLeft: 10 }} />
+              <View
+                style={{
+                  backgroundColor: "steelblue",
+                  width: 120,
+                  borderRadius: 3,
+                }}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <IconButton
+                    icon="alpha-w-box-outline"
+                    color="white"
+                    size={20}
+                  />
+
+                  <View
+                    style={{
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        paddingTop: 10,
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: 8,
+                      }}
+                    >
+                      {state.nama_jtm}
+                    </Text>
+                    <Text style={{ fontSize: 10, color: "floralwhite" }}>
+                      JTM/TIANG
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={{ paddingTop: 20 }}>
+            <Button
+              // style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
+              mode="text"
+              onPress={() => HandlingData()}
+            >
+              REFRESH DATA
+            </Button>
+          </View>
+        </View>
+      </View>
+    </>
+  );
+};
+export default Home;

@@ -1,0 +1,315 @@
+import React, { useState, useEffect } from "react";
+import * as Location from "expo-location";
+import MapView, { Marker, Callout } from "react-native-maps";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  AsyncStorage,
+  Alert,
+} from "react-native";
+import { ActivityIndicator, Button, FAB } from "react-native-paper";
+import Modals from "./modal";
+import * as Camera from "expo-camera";
+
+const InspeksiMap = ({ navigation }) => {
+  const [state, setState] = useState({
+    location: "",
+    errorMsg: "",
+    tiang: [],
+    isLoading: true,
+    processLoadng: false,
+    speed: 0,
+  });
+  const INITIAL_REGION = {
+    latitude: 105.2540928,
+    longitude: -5.3968896,
+    latitudeDelta: 0.11,
+    longitudeDelta: 0.14,
+  };
+  const [stateData, setStateData] = useState({
+    idtiang: "",
+    idjtm: "",
+    nmTiang: "",
+    nmJTM: "",
+    nmRayon: "",
+    modal: false,
+  });
+
+  const [visible, setvisible] = useState(false);
+
+  const [hasPermission, setHasPermission] = useState(null);
+
+  const permision = async () => {
+    const { status } = await Location.requestPermissionsAsync();
+    const { camera } = await Camera.requestPermissionsAsync();
+    if (status || camera !== "granted") {
+      console.log("Kamera Gagal");
+    }
+    const location = await Location.getCurrentPositionAsync({});
+    setState((prevstate) => ({
+      ...prevstate,
+      location: location,
+    }));
+  };
+
+  const loadData = async () => {
+    permision();
+
+    const { status } = await Location.requestPermissionsAsync();
+    if (status !== "granted") {
+      setState((prevstate) => ({
+        ...prevstate,
+        errorMsg: "Permission to access location was denied",
+      }));
+    }
+    const location = await Location.getCurrentPositionAsync({});
+
+    setState((prevstate) => ({
+      ...prevstate,
+      location: location,
+      mylatitude: location.coords.latitude,
+      mylongitude: location.coords.longitude,
+    }));
+    await AsyncStorage.getItem("tiang").then((value) => {
+      setState((prevstate) => ({
+        ...prevstate,
+        tiang: JSON.parse(value),
+        isLoading: false,
+      }));
+    });
+  };
+
+  const modalState = () => {
+    console.log("asdasd");
+    setStateData((prevstate) => ({
+      ...prevstate,
+      modal: false,
+    }));
+  };
+
+  const handleButton = (idtiang, idjtm, nmTiang, nmJTM, nmRayon, modal) => {
+    setStateData({
+      idtiang: idtiang,
+      idjtm: idjtm,
+      nmTiang: nmTiang,
+      nmJTM: nmJTM,
+      nmRayon: nmRayon,
+      modal: modal,
+    });
+  };
+
+  const refresh = async () => {
+    await AsyncStorage.getItem("tiang").then((value) => {
+      setState((prevstate) => ({
+        ...prevstate,
+        tiang: JSON.parse(value),
+        isLoading: true,
+      }));
+    });
+    loadData();
+  };
+
+  useEffect(() => {
+    loadData();
+
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
+  }, []);
+
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
+  const action = () => {
+    Alert.alert("Informasi", "Data Tiang Kosong, Mohon Input Kode TO");
+  };
+
+  if (state.isLoading == true) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View>
+          <ActivityIndicator />
+          <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+            Extraction Database...
+          </Text>
+          <Text style={{ fontSize: 10 }}>Tunggu Sejenak.</Text>
+          <Text style={{ fontSize: 10 }}>Mohon Perhatikan:</Text>
+          <Text style={{ fontSize: 10 }}>
+            1. Pastikan Anda Telah Memilih Data Tiang
+          </Text>
+          <Text style={{ fontSize: 10 }}>
+            2. Pastikan Koneksi Anda Stabil dan Lokasi Anda Aktif.
+          </Text>
+          <Text style={{ fontSize: 10 }}>
+            3. Jika Peta tidak Tampil lebih dari 3 Menit, Restart Devices Anda.
+          </Text>
+        </View>
+      </View>
+    );
+  }
+  if (state.tiang == null) {
+    return (
+      <>
+        {action()}
+        <View style={styles.container}>
+          <Modals dataState={stateData} modalState={modalState} />
+          <MapView
+            showsUserLocation
+            style={styles.mapStyle}
+            initialRegion={{
+              latitude: -5.3968896,
+              longitude: 105.2540928,
+              latitudeDelta: 0.11,
+              longitudeDelta: 0.14,
+            }}
+          ></MapView>
+        </View>
+        {/* <View style={{ marginTop: 0, width: 150, position: "absolute" }}>
+        <Button mode="contained" icon="refresh" onPress={() => refresh()}>
+          <Text>refresh</Text>
+        </Button>
+      </View> */}
+        <FAB
+          style={styles.fab}
+          small
+          icon="refresh"
+          label="Refresh"
+          onPress={() => refresh()}
+        />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <View style={styles.container}>
+        <Modals dataState={stateData} modalState={modalState} />
+
+        <MapView
+          showsUserLocation
+          style={styles.mapStyle}
+          initialRegion={{
+            latitude: -5.3968896,
+            longitude: 105.2540928,
+            latitudeDelta: 0.11,
+            longitudeDelta: 0.14,
+          }}
+        >
+          {state.tiang.map((marker) => (
+            <Marker
+              key={marker.idtiang}
+              draggable
+              coordinate={{
+                latitude: parseFloat(marker.koordinat_x),
+                longitude: parseFloat(marker.koordinat_y),
+              }}
+            >
+              <Callout
+                onPress={() =>
+                  handleButton(
+                    marker.idtiang,
+                    marker.idjtm,
+                    marker.notiang,
+                    marker.penyulang,
+                    marker.rayon,
+                    true
+                  )
+                }
+              >
+                <View
+                  style={{
+                    backgroundColor: "white",
+                  }}
+                >
+                  <View style={{ margin: 30 }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ULP/RAYON: {marker.rayon}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      JTM/PENYULANG: {marker.penyulang}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      TIANG: {marker.notiang}
+                    </Text>
+                    <View style={{ padding: 5 }} />
+                    <Text
+                      style={{
+                        fontSize: 12,
+                      }}
+                    >
+                      Terdapat Temuan pada tiang ini?
+                    </Text>
+                  </View>
+                </View>
+              </Callout>
+            </Marker>
+          ))}
+        </MapView>
+      </View>
+      {/* <View style={{ marginTop: 0, width: 150, position: "absolute" }}>
+        <Button mode="contained" icon="refresh" onPress={() => refresh()}>
+          <Text>refresh</Text>
+        </Button>
+      </View> */}
+      <FAB
+        style={styles.fab}
+        small
+        icon="refresh"
+        label="Refresh"
+        onPress={() => refresh()}
+      />
+    </>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    // height: 450,
+    height: Dimensions.get("window").height,
+  },
+  fab: {
+    position: "absolute",
+    backgroundColor: "red",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
+
+export default InspeksiMap;

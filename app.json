@@ -1,15 +1,16 @@
 {
   "expo": {
-    "name": "TestProject",
-    "slug": "TestProject",
+    "name": "AMPD",
+    "slug": "ampd-apps",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconApp.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -17,10 +18,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Aplikasi Management Pelanggan Distribusi By Amadis. Di Produksi oleh PLN Distribusi Lampung. "
   }
 }

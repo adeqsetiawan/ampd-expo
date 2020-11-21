@@ -1,0 +1,393 @@
+{
+  "listDataSUTM": [
+    {
+      "value": "1",
+      "label": "ROW-POHON"
+    },
+    {
+      "value": "2",
+      "label": "ROW-LAYANG-LAYANG"
+    },
+    {
+      "value": "3",
+      "label": "ROW-UMBUL-UMBUL"
+    },
+    {
+      "value": "4",
+      "label": "ROW-BANGUNAN"
+    },
+    {
+      "value": "5",
+      "label": "ROW-K3"
+    },
+    {
+      "value": "6",
+      "label": "Penghatntar/Kawat"
+    },
+    {
+      "value": "7",
+      "label": "Andongan"
+    },
+    {
+      "value": "8",
+      "label": "Terminasi SKUTM"
+    },
+
+    {
+      "value": "9",
+      "label": "Jointing SKUTM"
+    },
+    {
+      "value": "10",
+      "label": "CCO/Paralel Groove"
+    },
+
+    {
+      "value": "11",
+      "label": "Joint Sleeve"
+    },
+
+    {
+      "value": "12",
+      "label": "Ground Steel Wire"
+    }
+  ],
+  "listDataSKTM": [
+    {
+      "value": "1",
+      "label": "Kabel SKTM"
+    },
+    {
+      "value": "2",
+      "label": "Terminasi SKTM"
+    },
+    {
+      "value": "3",
+      "label": "Jointing"
+    }
+  ],
+  "listDataTiang": [
+    {
+      "value": "1",
+      "label": "Isolator Tumpu"
+    },
+    {
+      "value": "2",
+      "label": "Isolator Tarik"
+    },
+    {
+      "value": "3",
+      "label": "Armtie/Tunjang"
+    },
+    {
+      "value": "4",
+      "label": "Crossarm/Bracker/Travers"
+    },
+    {
+      "value": "5",
+      "label": "Topities/Bendrat"
+    },
+    {
+      "value": "6",
+      "label": "FCO"
+    },
+    {
+      "value": "7",
+      "label": "Arrester"
+    },
+    {
+      "value": "8",
+      "label": "Treck Schoor/Gur Wire"
+    },
+    {
+      "value": "9",
+      "label": "Kontramas/Horizontal Gun Wire"
+    },
+    {
+      "value": "10",
+      "label": "Strain Clamp"
+    },
+    {
+      "value": "11",
+      "label": "Tiang Beton"
+    },
+    {
+      "value": "12",
+      "label": "Tiang Beso"
+    },
+    {
+      "value": "13",
+      "label": "Podasi/Manset"
+    },
+    {
+      "value": "14",
+      "label": "Bayonet"
+    },
+    {
+      "value": "15",
+      "label": "Grounding"
+    },
+    {
+      "value": "16",
+      "label": "Recloser"
+    },
+    {
+      "value": "17",
+      "label": "LBS Motorize"
+    },
+    {
+      "value": "18",
+      "label": "LBS Manual/PTS/ABSW"
+    },
+    {
+      "value": "19",
+      "label": "MOF"
+    },
+    {
+      "value": "20",
+      "label": "CT Outdoor"
+    },
+    {
+      "value": "21",
+      "label": "PT Outdoor"
+    }
+  ],
+  "listDataTrafo": [
+    {
+      "value": "1",
+      "label": "Bushing TM"
+    },
+    {
+      "value": "2",
+      "label": "Bushing TR"
+    },
+    {
+      "value": "3",
+      "label": "Body Trafo/Packing"
+    },
+    {
+      "value": "4",
+      "label": "Oli/Minyak"
+    },
+    {
+      "value": "5",
+      "label": "LV Panel"
+    },
+    {
+      "value": "6",
+      "label": "Bushbar/PHBTR"
+    },
+    {
+      "value": "7",
+      "label": "Skun"
+    },
+    {
+      "value": "8",
+      "label": "NF Fuse"
+    },
+    {
+      "value": "9",
+      "label": "Base NH"
+    },
+    {
+      "value": "10",
+      "label": "JTR"
+    },
+    {
+      "value": "11",
+      "label": "FCO"
+    },
+    {
+      "value": "12",
+      "label": "Arrester"
+    },
+    {
+      "value": "13",
+      "label": "Grounding"
+    },
+    {
+      "value": "14",
+      "label": "Onload"
+    },
+    {
+      "value": "15",
+      "label": "Puding Utama"
+    },
+    {
+      "value": "16",
+      "label": "Puding Jurusan"
+    },
+    {
+      "value": "17",
+      "label": "Kubikel GH/Pelanggan"
+    }
+  ],
+  "listDataSUTM2": [
+    {
+      "value": "1",
+      "label": "Hotspot-Terminasi"
+    },
+    {
+      "value": "2",
+      "label": "Hotspot-Connector/Jointing"
+    },
+    {
+      "value": "3",
+      "label": "Hotspot-Kabel/SKUTM"
+    },
+    {
+      "value": "4",
+      "label": "Noise-Terminasi"
+    },
+    {
+      "value": "5",
+      "label": "Noise-Connector/Jointing"
+    },
+    {
+      "value": "6",
+      "label": "Noise-Kabel/SKUTM"
+    }
+  ],
+  "listDataSKTM2": [
+    {
+      "value": "1",
+      "label": "Hotspot-Terminasi"
+    },
+    {
+      "value": "2",
+      "label": "Hotspot-Jointing"
+    },
+    {
+      "value": "3",
+      "label": "Noise-Terminasi"
+    },
+    {
+      "value": "4",
+      "label": "Noise-Jointing"
+    }
+  ],
+  "listDataTiang2": [
+    {
+      "value": "1",
+      "label": "Hotspot-Isolator Lampu Tunggu"
+    },
+    {
+      "value": "2",
+      "label": "Hotspot-Isolator Tarik"
+    },
+    {
+      "value": "3",
+      "label": "Hotspot-FCO"
+    },
+    {
+      "value": "4",
+      "label": "Hotspot-Arrester"
+    },
+    {
+      "value": "5",
+      "label": "Noise-Isolator Lampu Tunggu"
+    },
+    {
+      "value": "6",
+      "label": "Noise-Isolator Tarik"
+    },
+    {
+      "value": "7",
+      "label": "Noise-FCO"
+    },
+    {
+      "value": "8",
+      "label": "Noise-Arrester"
+    }
+  ],
+  "listDataTrafo2": [
+    {
+      "value": "1",
+      "label": "Hotspot-FCO"
+    },
+    {
+      "value": "2",
+      "label": "Hotspot-Arrester"
+    },
+    {
+      "value": "3",
+      "label": "Hotspot-Bushing TM"
+    },
+    {
+      "value": "4",
+      "label": "Hotspot-Bushing TR"
+    },
+    {
+      "value": "5",
+      "label": "Hotspot-Body Trafo"
+    },
+    {
+      "value": "6",
+      "label": "Hotspot-SKUN"
+    },
+    {
+      "value": "7",
+      "label": "Hotspot-Onload"
+    },
+    {
+      "value": "8",
+      "label": "Hostpot-NH Fuse"
+    },
+    {
+      "value": "9",
+      "label": "Hotspot-Base NH"
+    },
+    {
+      "value": "10",
+      "label": "Hotspot-Busbar/PHBTR"
+    },
+    {
+      "value": "11",
+      "label": "Hotspot-Kubikel GH/Pelanggan"
+    },
+    {
+      "value": "12",
+      "label": "Noise-FCO"
+    },
+    {
+      "value": "13",
+      "label": "Noise-Arrester"
+    },
+    {
+      "value": "14",
+      "label": "Noise-Bushing TM"
+    },
+    {
+      "value": "15",
+      "label": "Noise-Bushing TR"
+    },
+    {
+      "value": "16",
+      "label": "Noise-Body Trafo"
+    },
+    {
+      "value": "17",
+      "label": "Noise-SKUN"
+    },
+    {
+      "value": "18",
+      "label": "Noise-Onload"
+    },
+    {
+      "value": "19",
+      "label": "Noise-NH Fuse"
+    },
+    {
+      "value": "20",
+      "label": "Noise-Base NH"
+    },
+    {
+      "value": "21",
+      "label": "Noise-Busbar/PHBTR"
+    },
+    {
+      "value": "22",
+      "label": "Noise-Kubikel GH/Pelanggan"
+    }
+  ]
+}
